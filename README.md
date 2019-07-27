@@ -4,6 +4,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)][mypy]
 [![Checked with Bandit](https://img.shields.io/badge/bandit-checked-lightgrey.svg)][bandit]
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=nymous/bookmarks_collection)](https://dependabot.com)
 
 A tool to serve Firefox bookmarks as API or HTML
 
