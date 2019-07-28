@@ -1,5 +1,6 @@
 # Bookmarks collection
 
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fnymous%2Fbookmarks_collection%2Fbadge&style=flat)](https://actions-badge.atrox.dev/nymous/bookmarks_collection/goto)
 ![Python 3.7+](https://img.shields.io/badge/python-3.7+-green.svg?logo=python)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)][mypy]
