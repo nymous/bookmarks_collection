@@ -11,7 +11,7 @@ pydantic = "^0.31"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.3b0",allows-prereleases = true}
-pre-commit = "^1.17"
+pre-commit = "^1.18"
 mypy = "^0.720.0"
 
 [build-system]
