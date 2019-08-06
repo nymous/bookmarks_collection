@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pydantic = "^0.31"
+pydantic = "^0.32"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.3b0",allows-prereleases = true}
