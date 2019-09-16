@@ -1,0 +1,45 @@
+name: Check code
+on: push
+
+jobs:
+  runBlack:
+    name: Run black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run black
+        uses: nymous/actions/python-tools@master
+        with:
+          args: black . --check
+
+  runBandit:
+    name: Run Bandit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Bandit
+        uses: nymous/actions/python-tools@master
+        with:
+          args: bandit -r .
+
+  runMypy:
+    name: Run Mypy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies
+      uses: nymous/actions/python-tools@master
+      with:
+        args: poetry install
+    - name: Run Mypy
+      uses: nymous/actions/python-tools@master
+      with:
+        args: mypy bookmarks_collection
+
+  runDetectSecrets:
+    name: Run detect-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run detect-secrets
+        uses: nymous/actions/detect-secrets@master
