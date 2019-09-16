@@ -35,11 +35,3 @@ jobs:
       uses: nymous/actions/python-tools@master
       with:
         args: mypy bookmarks_collection
-
-  runDetectSecrets:
-    name: Run detect-secrets
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Run detect-secrets
-        uses: nymous/actions/detect-secrets@master
