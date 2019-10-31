@@ -3,7 +3,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Union, List, Optional
 
-from pydantic import BaseModel, UrlStr
+from pydantic import BaseModel, AnyUrl
 
 """
 {
@@ -98,8 +98,8 @@ class BookmarkRoot(BookmarkFolder):
 
 class BookmarkEntry(BookmarkBase):
     charset: Optional[str] = None
-    iconuri: Optional[Union[UrlStr, str]] = None
-    uri: Union[UrlStr, str]
+    iconuri: Optional[Union[AnyUrl, str]] = None
+    uri: Union[AnyUrl, str]
 
 
 BookmarkFolder.update_forward_refs()
