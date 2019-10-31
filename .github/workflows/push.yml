@@ -14,6 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          source $HOME/.poetry/env
           poetry install
       - name: Run black
         run: black . --check
@@ -30,6 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          source $HOME/.poetry/env
           poetry install
       - name: Run Bandit
         run: bandit -r .
@@ -46,6 +48,7 @@ jobs:
       - name: Install dependencies
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          source $HOME/.poetry/env
           poetry install
       - name: Run Mypy
         run: mypy bookmarks_collection
