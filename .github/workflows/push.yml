@@ -16,8 +16,12 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
           source $HOME/.poetry/env
           poetry install
+          poetry shell
       - name: Run black
-        run: black . --check
+        run: |
+          source $HOME/.poetry/env
+          poetry shell
+          black . --check
 
   runBandit:
     name: Run Bandit
@@ -33,8 +37,12 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
           source $HOME/.poetry/env
           poetry install
+          poetry shell
       - name: Run Bandit
-        run: bandit -r .
+        run: |
+          source $HOME/.poetry/env
+          poetry shell
+          bandit -r .
 
   runMypy:
     name: Run Mypy
@@ -50,5 +58,9 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
           source $HOME/.poetry/env
           poetry install
+          poetry shell
       - name: Run Mypy
-        run: mypy bookmarks_collection
+        run: |
+          source $HOME/.poetry/env
+          poetry shell
+          mypy bookmarks_collection
