@@ -3,35 +3,49 @@ on: push
 
 jobs:
   runBlack:
-    name: Run black
+    name: Run Black
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run black
-        uses: nymous/actions/python-tools@master
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
         with:
-          args: black . --check
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          poetry install
+      - name: Run black
+        run: black . --check
 
   runBandit:
     name: Run Bandit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Bandit
-        uses: nymous/actions/python-tools@master
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
         with:
-          args: bandit -r .
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          poetry install
+      - name: Run Bandit
+        run: bandit -r .
 
   runMypy:
     name: Run Mypy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Install dependencies
-      uses: nymous/actions/python-tools@master
-      with:
-        args: poetry install
-    - name: Run Mypy
-      uses: nymous/actions/python-tools@master
-      with:
-        args: mypy bookmarks_collection
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          poetry install
+      - name: Run Mypy
+        run: mypy bookmarks_collection
