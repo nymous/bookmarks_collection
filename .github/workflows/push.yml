@@ -31,14 +31,9 @@ jobs:
         with:
           python-version: 3.7
       - name: Install dependencies
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          source $HOME/.poetry/env
-          poetry install
+        run: pip install --user bandit
       - name: Run Bandit
-        run: |
-          source $HOME/.poetry/env
-          poetry run bandit -r .
+        run: /home/runner/.local/bin/bandit -r .
 
   runMypy:
     name: Run Mypy
