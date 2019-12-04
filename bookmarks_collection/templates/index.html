@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookmarks Collection</title>
+</head>
+<body>
+
+<h1>Bookmarks</h1>
+
+{% for bookmark_place in bookmarks_root.children %}
+<h2>{{ bookmark_place.title }}</h2>
+
+<ul>
+{% for bookmark in bookmark_place.children recursive %}
+    <li><img src="{{ bookmark.iconuri }}" alt="" width="15px" height="15px">
+        <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
+        {% if bookmark.children %}
+            <ul>{{ loop(bookmark.children)}}</ul>
+        {% endif %}
+    </li>
+
+{% endfor %}
+
+</ul>
+
+{% endfor %}
+
+
+</body>
+</html>
