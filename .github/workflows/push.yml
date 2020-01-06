@@ -21,7 +21,7 @@ jobs:
         id: cache
         with:
           path: ~/.virtualenvs
-          key: poetry-${{ hashFiles('poetry.lock') }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
       - name: Set Poetry config
         run: |
           poetry config virtualenvs.in-project false
@@ -62,7 +62,7 @@ jobs:
         id: cache
         with:
           path: ~/.virtualenvs
-          key: poetry-${{ hashFiles('poetry.lock') }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
       - name: Set Poetry config
         run: |
           poetry config virtualenvs.in-project false
