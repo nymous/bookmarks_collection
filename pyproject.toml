@@ -6,13 +6,13 @@ authors = ["Thomas Gaudin <thomas.gaudin@centraliens-lille.org>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.7"
-pydantic = "^1.0"
+python = "^3.8"
+pydantic = "^1.6.1"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.10b0", allow-prereleases = true}
-pre-commit = "^1.20"
-mypy = "^0.740"
+pre-commit = "^2.6.0"
+mypy = "^0.782"
 
 [build-system]
 requires = ["poetry>=0.12"]
