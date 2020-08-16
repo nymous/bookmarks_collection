@@ -15,7 +15,7 @@ index_template = env.get_template("index.html")
 
 
 def main():
-    bookmarks = BookmarkRoot.parse_file("bookmarks-example.json")
+    bookmarks = BookmarkRoot.parse_file("bookmarks-2019-07-20-pretty.json")
     toolbar_root: BookmarkRoot = next(
         bookmark for bookmark in bookmarks.children if bookmark.guid == "toolbar_____"
     )

@@ -80,16 +80,16 @@ class BookmarkBase(BaseModel):
     lastModified: datetime
     id: int
     typeCode: int
-    type: str
+    type: BookmarkTypeEnum
 
 
 class BookmarkSeparator(BookmarkBase):
-    type: Literal["text/x-moz-place-separator"]
+    type: Literal[BookmarkTypeEnum.separator]
     typeCode: Literal[3]
 
 
 class BookmarkFolder(BookmarkBase):
-    type: Literal["text/x-moz-place-container"]
+    type: Literal[BookmarkTypeEnum.folder]
     typeCode: Literal[2]
     children: List[
         Union[BookmarkEntry, BookmarkRoot, BookmarkFolder, BookmarkSeparator]
@@ -97,13 +97,13 @@ class BookmarkFolder(BookmarkBase):
 
 
 class BookmarkRoot(BookmarkFolder):
-    type: Literal["text/x-moz-place-container"]
+    type: Literal[BookmarkTypeEnum.folder]
     typeCode: Literal[2]
     root: BookmarkRootEnum
 
 
 class BookmarkEntry(BookmarkBase):
-    type: Literal["text/x-moz-place"]
+    type: Literal[BookmarkTypeEnum.entry]
     typeCode: Literal[1]
     uri: Union[AnyUrl, str]
     charset: Optional[str] = None
