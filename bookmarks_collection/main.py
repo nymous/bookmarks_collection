@@ -1,7 +1,6 @@
-import json
+from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from pathlib import Path
 
 from objects import BookmarkRoot
 
@@ -16,19 +15,15 @@ index_template = env.get_template("index.html")
 
 
 def main():
-    with open("bookmarks-2019-07-20-simple.json") as f:
-        bookmarks_json = json.load(f)
-        bookmarks = BookmarkRoot(**bookmarks_json)
-        toolbar_root: BookmarkRoot = next(
-            bookmark
-            for bookmark in bookmarks.children
-            if bookmark.guid == "toolbar_____"
-        )
-        informatique_root: BookmarkRoot = next(
-            bookmark
-            for bookmark in toolbar_root.children
-            if bookmark.guid == "4R2TUlyxQpbx"
-        )
+    bookmarks = BookmarkRoot.parse_file("bookmarks-example.json")
+    toolbar_root: BookmarkRoot = next(
+        bookmark for bookmark in bookmarks.children if bookmark.guid == "toolbar_____"
+    )
+    informatique_root: BookmarkRoot = next(
+        bookmark
+        for bookmark in toolbar_root.children
+        if bookmark.guid == "4R2TUlyxQpbx"
+    )
     with open("index.html", "w") as f:
         f.write(index_template.render(bookmarks_root=informatique_root))
 
