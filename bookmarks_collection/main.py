@@ -2,7 +2,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from objects import BookmarkRoot
+import objects as BookmarkObjects
+from objects import BookmarkRoot, BookmarkFolder
 
 current_dir = Path(__file__).parent
 template_dir = str(current_dir / "templates")
@@ -19,13 +20,17 @@ def main():
     toolbar_root: BookmarkRoot = next(
         bookmark for bookmark in bookmarks.children if bookmark.guid == "toolbar_____"
     )
-    informatique_root: BookmarkRoot = next(
+    informatique_root: BookmarkFolder = next(
         bookmark
         for bookmark in toolbar_root.children
         if bookmark.guid == "4R2TUlyxQpbx"
     )
     with open("index.html", "w") as f:
-        f.write(index_template.render(bookmarks_root=informatique_root))
+        f.write(
+            index_template.render(
+                bookmarks_root=informatique_root, BookmarkObjects=BookmarkObjects
+            )
+        )
 
 
 if __name__ == "__main__":

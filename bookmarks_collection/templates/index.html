@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookmarks Collection</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
@@ -13,18 +14,23 @@
 {% for bookmark_place in bookmarks_root.children %}
 <h2>{{ bookmark_place.title }}</h2>
 
-<ul>
-{% for bookmark in bookmark_place.children recursive %}
-    <li><img src="{{ bookmark.iconuri }}" alt="" width="15px" height="15px">
-        <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
-        {% if bookmark.children %}
-            <ul>{{ loop(bookmark.children)}}</ul>
-        {% endif %}
-    </li>
+    <ul>
+    {% for bookmark in bookmark_place.children recursive %}
+        <li>
+            <div class="{{ "bookmark-folder" if bookmark.type == BookmarkObjects.BookmarkTypeEnum.folder else "bookmark-entry" }}">
+                {% if bookmark.type == BookmarkObjects.BookmarkTypeEnum.entry %}
+                    <img src="{{ bookmark.iconuri }}" alt="" width="15" height="15">
+                {% endif %}
+                <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
+                {% if bookmark.children %}
+                    <ul>{{ loop(bookmark.children)}}</ul>
+                {% endif %}
+            </div>
+        </li>
 
-{% endfor %}
+    {% endfor %}
 
-</ul>
+    </ul>
 
 {% endfor %}
 
