@@ -1,39 +1,40 @@
+{% from "_macros.html" import entry, folder %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bookmarks Collection</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookmarks Collection</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
 <h1>Bookmarks</h1>
 
-{% for bookmark_place in bookmarks_root.children %}
-<h2>{{ bookmark_place.title }}</h2>
+<main>
 
-    <ul>
-    {% for bookmark in bookmark_place.children recursive %}
-        <li>
-            <div class="{{ "bookmark-folder" if bookmark.type == BookmarkObjects.BookmarkTypeEnum.folder else "bookmark-entry" }}">
-                {% if bookmark.type == BookmarkObjects.BookmarkTypeEnum.entry %}
-                    <img src="{{ bookmark.iconuri }}" alt="" width="15" height="15">
-                {% endif %}
-                <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
-                {% if bookmark.children %}
-                    <ul>{{ loop(bookmark.children)}}</ul>
-                {% endif %}
-            </div>
-        </li>
+    {% for bookmark_place in bookmarks_root.children %}
+        <h2>{{ bookmark_place.title }}</h2>
+
+        <ul>
+            {% for bookmark in bookmark_place.children recursive %}
+                <li>
+                    {% if bookmark.type == BookmarkObjects.BookmarkTypeEnum.folder -%}
+                        {{ folder(bookmark, loop) }}
+                    {% else -%}
+                        {{ entry(bookmark) }}
+                    {% endif -%}
+                </li>
+
+            {% endfor %}
+
+        </ul>
 
     {% endfor %}
 
-    </ul>
-
-{% endfor %}
-
+</main>
 
 </body>
 </html>

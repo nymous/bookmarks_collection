@@ -2,12 +2,4 @@
 
 @tailwind components;
 
-.bookmark-folder {
-    @apply text-lg;
-}
-
-.bookmark-entry {
-    @apply text-base;
-}
-
 @tailwind utilities;

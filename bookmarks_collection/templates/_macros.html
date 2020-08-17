@@ -1,0 +1,16 @@
+{% macro folder(bookmark, loop) -%}
+    <div>
+        <span class="text-xl">{{ bookmark.title }}</span>
+        {% if bookmark.children -%}
+            <ul>{{ loop(bookmark.children) }}</ul>
+        {% endif -%}
+    </div>
+{% endmacro %}
+
+
+{% macro entry(bookmark) -%}
+    {% if bookmark.iconuri -%}
+    <img src="{{ bookmark.iconuri }}" alt="" width="15" height="15">
+    {% endif -%}
+    <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
+{% endmacro %}
