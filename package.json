@@ -4,8 +4,9 @@
   "description": "A tool to serve Firefox bookmarks as API or HTML",
   "main": "index.js",
   "scripts": {
-    "start": "postcss --output index.css bookmarks_collection/templates/index.css --watch",
-    "build": "NODE_ENV=production postcss --output index.css bookmarks_collection/templates/index.css"
+    "start": "postcss --output dist/index.css bookmarks_collection/templates/index.css",
+    "start:watch": "postcss --output dist/index.css bookmarks_collection/templates/index.css --watch",
+    "build": "NODE_ENV=production postcss --output dist/index.css bookmarks_collection/templates/index.css"
   },
   "repository": {
     "type": "git",

@@ -9,32 +9,37 @@
     <title>Bookmarks Collection</title>
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="hero-pattern">
 
 <h1>Bookmarks</h1>
 
-<main>
+<main class="container mx-auto">
 
-    {% for bookmark_place in bookmarks_root.children %}
-        <h2>{{ bookmark_place.title }}</h2>
+    {% set ns = namespace(bookmarks_count=0) %}
 
-        <ul>
-            {% for bookmark in bookmark_place.children recursive %}
-                <li>
-                    {% if bookmark.type == BookmarkObjects.BookmarkTypeEnum.folder -%}
-                        {{ folder(bookmark, loop) }}
-                    {% else -%}
-                        {{ entry(bookmark) }}
-                    {% endif -%}
-                </li>
-
-            {% endfor %}
-
-        </ul>
-
-    {% endfor %}
+    <ul class="grid grid-cols-auto-xs md:grid-cols-auto-sm gap-4">
+        {% for bookmark in bookmarks_root.children | sort(attribute="title") | sort(attribute="typeCode", reverse=true) recursive %}
+            <li class="{{ "col-span-all" if bookmark is folder }}">
+                {% if bookmark is folder %}
+                    {{ folder(bookmark, loop) }}
+                {% else %}
+                    {{ entry(bookmark, ns) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 
 </main>
+
+Total bookmarks: {{ ns.bookmarks_count }}
+
+<div class="fixed bottom-0 right-0 p-4 bg-black text-white z-50">
+    <div class="block">xs</div>
+    <div class="sm:block hidden">sm</div>
+    <div class="md:block hidden">md</div>
+    <div class="lg:block hidden">lg</div>
+    <div class="xl:block hidden">xl</div>
+</div>
 
 </body>
 </html>

@@ -1,16 +1,21 @@
-{% macro folder(bookmark, loop) -%}
-    <div>
-        <span class="text-xl">{{ bookmark.title }}</span>
-        {% if bookmark.children -%}
-            <ul>{{ loop(bookmark.children) }}</ul>
-        {% endif -%}
+{% macro folder(bookmark, loop) %}
+    <div class="bg-white rounded shadow m-1 p-2">
+        <p class="text-2xl font-bold mb-2">{{ bookmark.title }}</p>
+        {% if bookmark.children %}
+            <ul class="grid grid-cols-auto-xs md:grid-cols-auto-sm gap-4">
+                {{ loop(bookmark.children | sort(attribute="title") | sort(attribute="typeCode", reverse=true)) }}
+            </ul>
+        {% endif %}
     </div>
 {% endmacro %}
 
 
-{% macro entry(bookmark) -%}
-    {% if bookmark.iconuri -%}
-    <img src="{{ bookmark.iconuri }}" alt="" width="15" height="15">
-    {% endif -%}
-    <a href="{{ bookmark.uri }}">{{ bookmark.title }}</a>
+{% macro entry(bookmark, ns) %}
+    {% set ns.bookmarks_count = ns.bookmarks_count + 1 %}
+    <a href="{{ bookmark.uri }}" class="block rounded shadow-md bg-gray-100">
+        {% if bookmark.iconuri %}
+{#            <img class="w-full" src="{{ bookmark.iconuri }}" alt="">#}
+        {% endif %}
+        <p class="h-24 overflow-y-auto">{{ bookmark.title }}</p>
+    </a>
 {% endmacro %}
