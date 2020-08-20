@@ -15,6 +15,11 @@ A tool to serve Firefox bookmarks as API or HTML
   * Python 3.8+. You can use [pyenv][pyenv-installation] to install multiple versions of Python in parallel.
   * [Poetry][poetry] to manage Python dependencies
 
+## Usage
+
+- "Backup" your bookmarks from Firefox to a JSON file
+- Extract the root bookmark you want to publish with `jq` (eg. `jq '.children[] | select(.guid == "toolbar_____") | .children[] | select(.guid == "4R2TUlyxQpbx")' bookmarks.json > extract.json`)
+- Run the script: `python bookmarks_collection/main.py`
 
 [bandit]: https://github.com/PyCQA/bandit
 [black]: https://github.com/python/black

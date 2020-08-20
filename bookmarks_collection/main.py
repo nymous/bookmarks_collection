@@ -2,8 +2,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from helpers import folder, entry
-from objects import BookmarkRoot, BookmarkFolder
+from helpers import folder, entry, human_date, folder_or_entry
+from objects import BookmarkFolder
 
 current_dir = Path(__file__).parent
 template_dir = str(current_dir / "templates")
@@ -16,24 +16,18 @@ env = Environment(
 )
 
 env.filters["any"] = any
+env.filters["human_date"] = human_date
 env.tests["folder"] = folder
 env.tests["entry"] = entry
+env.tests["folder_or_entry"] = folder_or_entry
 
 index_template = env.get_template("index.html")
 
 
 def main():
-    bookmarks = BookmarkRoot.parse_file("bookmarks-2019-07-20-pretty.json")
-    toolbar_root: BookmarkRoot = next(
-        bookmark for bookmark in bookmarks.children if bookmark.guid == "toolbar_____"
-    )
-    informatique_root: BookmarkFolder = next(
-        bookmark
-        for bookmark in toolbar_root.children
-        if bookmark.guid == "4R2TUlyxQpbx"
-    )
+    bookmarks = BookmarkFolder.parse_file("bookmarks-2020-08-19-Info.json")
     with open(Path("dist") / "index.html", "w") as f:
-        f.write(index_template.render(bookmarks_root=informatique_root))
+        f.write(index_template.render(bookmarks_root=bookmarks))
 
 
 if __name__ == "__main__":

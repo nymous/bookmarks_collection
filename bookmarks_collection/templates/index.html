@@ -15,15 +15,18 @@
 
 <main class="container mx-auto">
 
-    {% set ns = namespace(bookmarks_count=0) %}
+    {% set ns = namespace(bookmarks_count=0, folder_path=[]) %}
 
     <ul class="grid grid-cols-auto-xs md:grid-cols-auto-sm gap-4">
-        {% for bookmark in bookmarks_root.children | sort(attribute="title") | sort(attribute="typeCode", reverse=true) recursive %}
+        {% for bookmark in bookmarks_root.children | select("folder_or_entry") | sort(attribute="title") | sort(attribute="typeCode", reverse=true) recursive %}
             <li class="{{ "col-span-all" if bookmark is folder }}">
                 {% if bookmark is folder %}
-                    {{ folder(bookmark, loop) }}
+                    {{ folder(bookmark, loop, ns) }}
                 {% else %}
                     {{ entry(bookmark, ns) }}
+                {% endif %}
+                {% if loop.last %}
+                    {% set ns.folder_path = ns.folder_path[:-1] %}
                 {% endif %}
             </li>
         {% endfor %}

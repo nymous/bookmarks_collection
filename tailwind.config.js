@@ -16,6 +16,14 @@ module.exports = {
       }
     },
   },
-  variants: {},
-  plugins: [],
+  variants: {
+    opacity: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'hover-hover', 'hover-none'],
+  },
+  plugins: [
+      require("tailwindcss-touch")(),
+      require('tailwindcss-scroll-snap')
+  ],
+  future: {
+    removeDeprecatedGapUtilities: true
+  }
 }

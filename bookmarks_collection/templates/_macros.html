@@ -1,9 +1,17 @@
-{% macro folder(bookmark, loop) %}
-    <div class="bg-white rounded shadow m-1 p-2">
-        <p class="text-2xl font-bold mb-2">{{ bookmark.title }}</p>
+{% macro folder(bookmark, loop, ns) %}
+    {% set anchor = (ns.folder_path + [bookmark.title]) | join("-") | urlencode %}
+    <div class="bg-white rounded shadow m-1 p-2" id="{{ anchor }}">
+        <p class="mb-2 pl-4 sticky top-0 bg-white group text-2xl font-bold snap-pt-2">
+            {% if ns.folder_path %}
+                <span class="text-gray-700 text-xl font-normal">{{ ns.folder_path | join(" / ") }} / </span>
+            {% endif %}
+            <span>{{ bookmark.title }}</span>
+            <a class="ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100 hover-none:opacity-100 transition-opacity duration-100 text-gray-700 font-normal" href="#{{ anchor }}">¶</a>
+        </p>
         {% if bookmark.children %}
             <ul class="grid grid-cols-auto-xs md:grid-cols-auto-sm gap-4">
-                {{ loop(bookmark.children | sort(attribute="title") | sort(attribute="typeCode", reverse=true)) }}
+                {% set ns.folder_path = ns.folder_path + [bookmark.title] %}
+                {{ loop(bookmark.children | select("folder_or_entry") | sort(attribute="title") | sort(attribute="typeCode", reverse=true)) }}
             </ul>
         {% endif %}
     </div>
@@ -12,10 +20,15 @@
 
 {% macro entry(bookmark, ns) %}
     {% set ns.bookmarks_count = ns.bookmarks_count + 1 %}
-    <a href="{{ bookmark.uri }}" class="block rounded shadow-md bg-gray-100">
-        {% if bookmark.iconuri %}
-{#            <img class="w-full" src="{{ bookmark.iconuri }}" alt="">#}
-        {% endif %}
-        <p class="h-24 overflow-y-auto">{{ bookmark.title }}</p>
+    <a href="{{ bookmark.uri }}" class="block px-6 py-4 rounded shadow-md md:shadow-lg bg-white flex flex-col h-48">
+        <p class="flex-grow mb-2 overflow-y-auto">{{ bookmark.title }}</p>
+        <div class="flex">
+            <p class="text-sm text-gray-800 flex-grow" title="{{ bookmark.dateAdded.strftime("%Y/%m/%d") }}">
+                Added {{ bookmark.dateAdded | human_date }}
+            </p>
+            {% if bookmark.iconuri %}
+                <img class="h-auto w-6" src="{{ bookmark.iconuri }}" alt="">
+            {% endif %}
+        </div>
     </a>
 {% endmacro %}
