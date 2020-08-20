@@ -1,0 +1,48 @@
+{% from "_macros.html" import entry, folder %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookmarks Collection</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="hero-pattern">
+
+<h1>Bookmarks</h1>
+
+<main class="container mx-auto">
+
+    {% set ns = namespace(bookmarks_count=0, folder_path=[]) %}
+
+    <ul class="grid grid-cols-auto-xs md:grid-cols-auto-sm gap-4">
+        {% for bookmark in bookmarks_root.children | select("folder_or_entry") | sort(attribute="title") | sort(attribute="typeCode", reverse=true) recursive %}
+            <li class="{{ "col-span-all" if bookmark is folder }}">
+                {% if bookmark is folder %}
+                    {{ folder(bookmark, loop, ns) }}
+                {% else %}
+                    {{ entry(bookmark, ns) }}
+                {% endif %}
+                {% if loop.last %}
+                    {% set ns.folder_path = ns.folder_path[:-1] %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+</main>
+
+Total bookmarks: {{ ns.bookmarks_count }}
+
+<div class="fixed bottom-0 right-0 p-4 bg-black text-white z-50">
+    <div class="block">xs</div>
+    <div class="sm:block hidden">sm</div>
+    <div class="md:block hidden">md</div>
+    <div class="lg:block hidden">lg</div>
+    <div class="xl:block hidden">xl</div>
+</div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 # Bookmarks collection
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fnymous%2Fbookmarks_collection%2Fbadge&style=flat)](https://actions-badge.atrox.dev/nymous/bookmarks_collection/goto)
-![Python 3.7+](https://img.shields.io/badge/python-3.7+-green.svg?logo=python)
+![Python 3.8+](https://img.shields.io/badge/python-3.8+-green.svg?logo=python)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)][mypy]
@@ -12,9 +12,14 @@ A tool to serve Firefox bookmarks as API or HTML
 
 ## Requirements
 
-  * Python 3.7+. You can use [pyenv][pyenv-installation] to install multiple versions of Python in parallel.
+  * Python 3.8+. You can use [pyenv][pyenv-installation] to install multiple versions of Python in parallel.
   * [Poetry][poetry] to manage Python dependencies
 
+## Usage
+
+- "Backup" your bookmarks from Firefox to a JSON file
+- Extract the root bookmark you want to publish with `jq` (eg. `jq '.children[] | select(.guid == "toolbar_____") | .children[] | select(.guid == "4R2TUlyxQpbx")' bookmarks.json > extract.json`)
+- Run the script: `python bookmarks_collection/main.py`
 
 [bandit]: https://github.com/PyCQA/bandit
 [black]: https://github.com/python/black

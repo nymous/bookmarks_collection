@@ -1,0 +1,32 @@
+{
+  "name": "bookmarks_collection",
+  "version": "1.0.0",
+  "description": "A tool to serve Firefox bookmarks as API or HTML",
+  "main": "index.js",
+  "scripts": {
+    "start": "postcss --output dist/index.css bookmarks_collection/templates/index.css",
+    "start:watch": "postcss --output dist/index.css bookmarks_collection/templates/index.css --watch",
+    "build": "NODE_ENV=production postcss --output dist/index.css bookmarks_collection/templates/index.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nymous/bookmarks_collection.git"
+  },
+  "author": "Thomas Gaudin <thomas.gaudin@centraliens-lille.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nymous/bookmarks_collection/issues"
+  },
+  "homepage": "https://github.com/nymous/bookmarks_collection#readme",
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.7.2",
+    "tailwindcss-scroll-snap": "^1.0.3",
+    "tailwindcss-touch": "^1.0.1"
+  },
+  "devDependencies": {
+    "vercel": "^19.2.0"
+  }
+}

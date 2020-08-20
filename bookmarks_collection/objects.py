@@ -1,9 +1,10 @@
 from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Literal
 
-from pydantic import BaseModel, AnyUrl
+from pydantic import BaseModel, AnyUrl, Field
 
 """
 {
@@ -79,27 +80,34 @@ class BookmarkBase(BaseModel):
     lastModified: datetime
     id: int
     typeCode: int
-    type: str
+    type: BookmarkTypeEnum
 
 
 class BookmarkSeparator(BookmarkBase):
-    pass
+    type: Literal[BookmarkTypeEnum.separator]
+    typeCode: Literal[3]
 
 
 class BookmarkFolder(BookmarkBase):
+    type: Literal[BookmarkTypeEnum.folder]
+    typeCode: Literal[2]
     children: List[
         Union[BookmarkEntry, BookmarkRoot, BookmarkFolder, BookmarkSeparator]
-    ]
+    ] = Field(default_factory=list)
 
 
 class BookmarkRoot(BookmarkFolder):
+    type: Literal[BookmarkTypeEnum.folder]
+    typeCode: Literal[2]
     root: BookmarkRootEnum
 
 
 class BookmarkEntry(BookmarkBase):
+    type: Literal[BookmarkTypeEnum.entry]
+    typeCode: Literal[1]
+    uri: Union[AnyUrl, str]
     charset: Optional[str] = None
     iconuri: Optional[Union[AnyUrl, str]] = None
-    uri: Union[AnyUrl, str]
 
 
 BookmarkFolder.update_forward_refs()
