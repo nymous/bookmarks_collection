@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pydantic = "^1.6.1"
+pydantic = "^1.7"
 Jinja2 = "^2.11.2"
 pendulum = "^2.1.2"
 
