@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from abc import ABCMeta
 from datetime import datetime
 from enum import Enum
-from typing import Union, List, Optional, Literal
+from typing import Union, List, Optional, Literal, Iterator
 
 from pydantic import BaseModel, AnyUrl, Field
 
@@ -72,7 +73,7 @@ class BookmarkRootEnum(str, Enum):
     mobile = "mobileFolder"
 
 
-class BookmarkBase(BaseModel):
+class BookmarkBase(BaseModel, metaclass=ABCMeta):
     guid: str
     title: str
     index: int
@@ -112,3 +113,10 @@ class BookmarkEntry(BookmarkBase):
 
 BookmarkFolder.update_forward_refs()
 BookmarkRoot.update_forward_refs()
+
+
+def recursive_iter(bookmark: BookmarkBase) -> Iterator[BookmarkBase]:
+    if isinstance(bookmark, BookmarkFolder):
+        for child in bookmark.children:
+            yield from recursive_iter(child)
+    yield bookmark

@@ -3,7 +3,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from helpers import folder, entry, human_date, folder_or_entry
-from objects import BookmarkFolder
+from bookmarks import BookmarkFolder
 
 current_dir = Path(__file__).parent
 template_dir = str(current_dir / "templates")

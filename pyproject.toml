@@ -10,6 +10,14 @@ python = "^3.8"
 pydantic = "^1.6.1"
 Jinja2 = "^2.11.2"
 pendulum = "^2.1.2"
+httpx = {extras = ["http2"], version = "^0.14.1"}
+pyfavicon = "^0.1.1"
+nm-iconfinder = "^0.2.1"
+pyunfurl = "^0.1.4"
+grabicon = "^0.1.2"
+urlimage = "^0.0.2"
+favicon = "^0.7.0"
+aioify = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.10b0", allow-prereleases = true}

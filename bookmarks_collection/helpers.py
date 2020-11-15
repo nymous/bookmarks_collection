@@ -3,7 +3,7 @@ from typing import Union
 
 import pendulum
 
-from objects import BookmarkFolder, BookmarkEntry, BookmarkTypeEnum
+from bookmarks import BookmarkFolder, BookmarkEntry, BookmarkTypeEnum
 
 
 ######################

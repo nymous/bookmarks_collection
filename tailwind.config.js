@@ -18,6 +18,8 @@ module.exports = {
   },
   variants: {
     opacity: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'hover-hover', 'hover-none'],
+    transitionProperty: ['responsive', 'motion-safe', 'motion-reduce', 'hover-hover', 'hover-none'],
+    translate: ['responsive', 'hover', 'focus', 'motion-safe', 'motion-reduce', 'hover-hover', 'hover-none']
   },
   plugins: [
       require("tailwindcss-touch")(),
