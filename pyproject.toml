@@ -12,7 +12,7 @@ Jinja2 = "^2.11.2"
 pendulum = "^2.1.2"
 
 [tool.poetry.dev-dependencies]
-black = {version = "^19.10b0", allow-prereleases = true}
+black = {version = "^21.5b2", allow-prereleases = true}
 pre-commit = "^2.6.0"
 mypy = "^0.782"
 
